@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import { formatSize } from '~/lib/utils'
 
@@ -35,7 +35,6 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
                         <div className="uploader-selected-file" onClick={(e) => e.stopPropagation()}>
                             <img src="/images/pdf.png" alt="pdf" className="size-10" />
                         <div className="flex items-center space-x-3">
-
                             <div>
                                 <p className="text-sm text-gray-700 font-medium truncate max-w-xs">
                                     {file.name}
@@ -44,7 +43,12 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
                                     {formatSize(file.size)}
                                 </p>
                             </div>
-                            </div>
+                        </div>
+                            <button className="p-2 cursor-pointer" onClick={(e) => {
+                                onFileSelect?.(null)
+                            }}>
+                                <img src="/icons/cross.svg" alt="remove" className="w-4 h-4" />
+                            </button>
                         </div>
                     ): (
                         <div>
@@ -61,13 +65,8 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
                     )}
                 </div>
             </div>
-            <button className="p-2 cursor-pointer" onClick={(e) => {
-                onFileSelect?.(null);
-            }}>
-                <img src="/icons/cross.svg" alt="remove" className="w-4 h-4" />
-            </button>
         </div>
-    );
+    )
 }
 
-export default FileUploader;
+export default FileUploader
